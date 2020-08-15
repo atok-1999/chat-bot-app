@@ -2,4 +2,5 @@ export const GET_DATASET = 'GET_DATASET';
 export const ADD_TOPIC_TO_CHATS = 'ADD_TOPIC_TO_CHATS';
 export const SET_CHOICES = 'SET_CHOICES';
 export const ADD_CHOICE_TO_CHATS = 'ADD_CHOICE_TO_CHATS';
-export const SET_CURRENT_ID = 'SET_CURRENTID';
+export const SET_CURRENT_ID = 'SET_CURRENT_ID';
+export const GET_WEATHER_DATA = 'GET_WEATHER_DATA';

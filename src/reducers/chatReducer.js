@@ -4,6 +4,7 @@ import {
   SET_CHOICES,
   ADD_CHOICE_TO_CHATS,
   SET_CURRENT_ID,
+  GET_WEATHER_DATA,
 } from '../actions/types';
 
 const initialState = {
@@ -59,6 +60,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         currentId: action.payload,
+      };
+
+    case GET_WEATHER_DATA:
+      return {
+        ...state,
+        chats: [...state.chats, { content: action.payload, type: 'topic' }],
       };
 
     default:
