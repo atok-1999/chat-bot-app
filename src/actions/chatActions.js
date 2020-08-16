@@ -77,7 +77,7 @@ export const getWeatherData = (content) => async (dispatch) => {
   }
 
   let res = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${process.env.REACT_APP_API_KEY}`
+    `https://api.openweathermap.org/data/2.5/forecast?q=${location}&lang=ja&appid=${process.env.REACT_APP_API_KEY}`
   );
   let data = await res.json();
 
@@ -86,33 +86,14 @@ export const getWeatherData = (content) => async (dispatch) => {
   let weather_description = data.list[8].weather[0].description;
   let weather_emoji;
 
-  if (weather_description === 'clear sky') {
-    weather_emoji = `☀️`;
-    weather_description = '晴天';
-  } else if (weather_description === 'few clouds') {
-    weather_emoji = `🌤`;
-    weather_description = '晴れ時々曇り';
-  } else if (weather_description === 'scattered clouds') {
-    weather_emoji = `☁️`;
-    weather_description = '曇り';
-  } else if (weather_description === 'broken clouds') {
-    weather_emoji = `⛅️`;
-    weather_description = '曇り時々晴れ';
-  } else if (weather_description === 'shower rain') {
-    weather_emoji = `🌂`;
-    weather_description = '小雨';
-  } else if (weather_description === 'rain') {
+  if (weather_description.includes('晴')) {
+    weather_emoji = '☀️';
+  } else if (weather_description.includes('雲' || '曇')) {
+    weather_emoji = '☁️';
+  } else if (weather_description.includes('雨')) {
     weather_emoji = '☔️';
-    weather_description = '雨';
-  } else if (weather_description === 'thunderstorm') {
-    weather_emoji = '⚡️';
-    weather_description = '嵐';
-  } else if (weather_description === 'snow') {
-    weather_emoji = '❄️';
-    weather_description = '雪';
-  } else if (weather_description === 'mist') {
-    weather_emoji = '🌫';
-    weather_description = '霧';
+  } else {
+    weather_emoji = '🐶';
   }
 
   let weatherData = `
@@ -128,5 +109,5 @@ export const getWeatherData = (content) => async (dispatch) => {
       type: GET_WEATHER_DATA,
       payload: weatherData,
     });
-  }, 1200);
+  }, 2000);
 };

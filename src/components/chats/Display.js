@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Chats, Choices } from '../index';
+import { Chats, Choices, Loading } from '../index';
 import Card from '@material-ui/core/Card';
 import { connect } from 'react-redux';
 import {
@@ -14,12 +14,18 @@ const useStyles = makeStyles({
   root: {
     width: 380,
     height: 600,
-    margin: '10px',
+    margin: '10px 15px',
     backgroundColor: '#424242',
   },
 });
 
-const Display = ({ currentId, getDataset, addTopicToChats, setChoices }) => {
+const Display = ({
+  currentId,
+  loading,
+  getDataset,
+  addTopicToChats,
+  setChoices,
+}) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -38,6 +44,10 @@ const Display = ({ currentId, getDataset, addTopicToChats, setChoices }) => {
     }
   }, [addTopicToChats, setChoices, currentId]);
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <Card className={classes.root}>
       <Chats />
@@ -48,6 +58,7 @@ const Display = ({ currentId, getDataset, addTopicToChats, setChoices }) => {
 
 Display.propTypes = {
   currentId: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
   getDataset: PropTypes.func.isRequired,
   addTopicToChats: PropTypes.func.isRequired,
   setChoices: PropTypes.func.isRequired,
@@ -55,6 +66,7 @@ Display.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentId: state.chatBot.currentId,
+  loading: state.chatBot.loading,
 });
 
 export default connect(mapStateToProps, {

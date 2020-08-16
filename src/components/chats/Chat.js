@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import FaceIcon from '@material-ui/icons/Face';
+import Grow from '@material-ui/core/Grow';
+import ShibaInuPic from '../../static/shiba_inu.jpg';
 
 const useStyles = makeStyles({
   reverse: {
@@ -18,24 +20,34 @@ const useStyles = makeStyles({
 const Chat = ({ content, type }) => {
   const classes = useStyles();
 
+  const [rendered, setRender] = useState(false);
+
+  useEffect(() => {
+    setRender(true);
+  }, []);
+
   return (
     <div>
       {type === 'topic' ? (
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar alt='icon' />
-          </ListItemAvatar>
-          <ChatBubbleLeft>{content}</ChatBubbleLeft>
-        </ListItem>
+        <Grow in={rendered}>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar alt='shiba inu looking at you' src={ShibaInuPic} />
+            </ListItemAvatar>
+            <ChatBubbleLeft>{content}</ChatBubbleLeft>
+          </ListItem>
+        </Grow>
       ) : (
-        <ListItem className={classes.reverse}>
-          <ListItemAvatar>
-            <Avatar>
-              <FaceIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ChatBubbleRight>{content}</ChatBubbleRight>
-        </ListItem>
+        <Grow in={rendered}>
+          <ListItem className={classes.reverse}>
+            <ListItemAvatar>
+              <Avatar>
+                <FaceIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ChatBubbleRight>{content}</ChatBubbleRight>
+          </ListItem>
+        </Grow>
       )}
     </div>
   );

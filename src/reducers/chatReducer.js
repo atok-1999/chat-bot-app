@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   GET_DATASET,
   ADD_TOPIC_TO_CHATS,
@@ -12,6 +14,7 @@ const initialState = {
   chats: [],
   currentId: 1,
   dataset: {},
+  loading: true,
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +23,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         dataset: action.payload,
+        loading: false,
       };
 
     case ADD_TOPIC_TO_CHATS:
@@ -28,7 +32,10 @@ export default (state = initialState, action) => {
       );
       return {
         ...state,
-        chats: [...state.chats, { content: currentSet[0].chat, type: 'topic' }],
+        chats: [
+          ...state.chats,
+          { content: currentSet[0].chat, type: 'topic', id: uuidv4() },
+        ],
       };
 
     case SET_CHOICES:
@@ -41,7 +48,10 @@ export default (state = initialState, action) => {
     case ADD_CHOICE_TO_CHATS:
       return {
         ...state,
-        chats: [...state.chats, { content: action.payload, type: 'choice' }],
+        chats: [
+          ...state.chats,
+          { content: action.payload, type: 'choice', id: uuidv4() },
+        ],
       };
 
     case SET_CURRENT_ID:
@@ -65,7 +75,10 @@ export default (state = initialState, action) => {
     case GET_WEATHER_DATA:
       return {
         ...state,
-        chats: [...state.chats, { content: action.payload, type: 'topic' }],
+        chats: [
+          ...state.chats,
+          { content: action.payload, type: 'topic', id: uuidv4() },
+        ],
       };
 
     default:

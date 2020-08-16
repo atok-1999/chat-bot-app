@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import { Chat } from '../index';
 import { connect } from 'react-redux';
@@ -16,7 +15,7 @@ const Chats = ({ chats }) => {
   return (
     <Wrapper id={'scroll-area'}>
       {chats.map((chat) => (
-        <Chat content={chat.content} type={chat.type} key={uuidv4()} />
+        <Chat content={chat.content} type={chat.type} key={chat.id} />
       ))}
     </Wrapper>
   );
