@@ -12,7 +12,6 @@ const useStyles = makeStyles({
   reverse: {
     display: 'flex',
     flexDirection: 'row-reverse',
-    padding: 0,
     margin: 0,
   },
 });
@@ -34,7 +33,9 @@ const Chat = ({ content, type }) => {
             <ListItemAvatar>
               <Avatar alt='shiba inu looking at you' src={ShibaInuPic} />
             </ListItemAvatar>
-            <ChatBubbleLeft>{content}</ChatBubbleLeft>
+            <ChatBubbleLeft>
+              <div>{content}</div>
+            </ChatBubbleLeft>
           </ListItem>
         </Grow>
       ) : (
@@ -45,7 +46,9 @@ const Chat = ({ content, type }) => {
                 <FaceIcon />
               </Avatar>
             </ListItemAvatar>
-            <ChatBubbleRight>{content}</ChatBubbleRight>
+            <ChatBubbleRight>
+              <div>{content}</div>
+            </ChatBubbleRight>
           </ListItem>
         </Grow>
       )}
@@ -58,7 +61,6 @@ const ChatBubbleLeft = styled.div`
   max-width: 200px;
   margin: 10px 0;
   padding: 10px;
-
   font-size: 14px;
   text-align: left;
   border-radius: 12px;
@@ -68,7 +70,7 @@ const ChatBubbleLeft = styled.div`
     display: inline-block;
     position: absolute;
     top: 47%;
-    left: -10%;
+    left: -20px;
     border: 8px solid transparent;
     border-right: 18px solid #edf1ee;
   }
@@ -88,6 +90,7 @@ const ChatBubbleRight = styled.div`
     display: inline-block;
     position: absolute;
     top: 47%;
+    right: -17px;
     border: 8px solid transparent;
     border-right: 18px solid #30e852;
     transform: rotate(180deg);
