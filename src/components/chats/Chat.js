@@ -13,6 +13,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row-reverse',
     margin: 0,
+    padding: 0,
   },
 });
 
